@@ -5,15 +5,13 @@
 #include <string>
 #include <vector>
 #include <limits>
+#include <memory>
 
 
 int main()
 {
 	BankAccount a_bank;
-	CheckingAccount* c_bank;
-	SavingsAccount* s_bank;
 	std::vector<std::unique_ptr<BankAccount>> accountList;
-	std::vector<BankAccount> bank;
 	int option, accountOption, accountNum;
 	double fee, rate;
 	std::string accountName;
@@ -26,7 +24,8 @@ int main()
 			<< "\n2. See Account"
 			<< "\n3. Deposit"
 			<< "\n4. Withdraw"
-			<< "\n5. Quit"
+			<< "\n5. Apply Interest"
+			<< "\n6. Quit"
 			<< std::endl;
 
 		std::cout << "> ";
@@ -231,11 +230,45 @@ int main()
 			}
 			std::cout << std::endl;
 			break;
+		case 5:
+			if (accountList.empty())
+			{
+				std::cout << "Sorry but there are no accounts registered." << std::endl;
+			}
+			else
+			{
+				std::cout << "Please enter in your account number." << std::endl;
+				std::cout << "> ";
+				while (!(std::cin >> accountNum))
+				{
+					std::cin.clear();
+					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					std::cout << "> ";
+				}
+				std::cout << std::endl;
+
+				found = false;
+				for (int i = 0; i < accountList.size(); i++)
+				{
+					if (accountList.at(i).get()->GetAccountNumber() == std::to_string(accountNum))
+					{
+						found = true;
+						SavingsAccount* SavingsInterestAccount = dynamic_cast<SavingsAccount*>(accountList.at(i).get());
+						if (SavingsInterestAccount) { SavingsInterestAccount->calculateInterest(); }
+					}
+				}
+				if (found == false)
+				{
+					std::cout << "Account was not found!" << std::endl;
+				}
+			}
+			std::cout << std::endl;
+			break;
 		default:
 			continue;
 		}
 
-	} while (option != 5);
+	} while (option != 6);
 
 	return 0;
 }
