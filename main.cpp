@@ -1,22 +1,37 @@
+/*
+*	Name: Aaron Vasquez
+*	Date: September 27, 2025
+*	Program Purpose: Banking system program meant for using inheritance.
+*	Assignment: Lab Activities: Inheritance
+*/
+
+// Imported header files
 #include "BankAccount.h"
 #include "CheckingAccount.h"
 #include "SavingsAccount.h"
+
+// Imported libraries
 #include <iostream>
 #include <string>
 #include <vector>
 #include <limits>
 #include <memory>
 
+// Main function
 int main()
 {
+	// Vectors
 	BankAccount a_bank;
 	std::vector<std::unique_ptr<BankAccount>> accountList;
+
+	// Main variables
 	int option, accountOption, accountNum;
 	double fee, rate;
 	std::string accountName;
 	bool found = false;
 	double amount;
 
+	// Main program loop (loops until 6 is entered into option variable)
 	do {
 		std::cout << "[Choose a option!]"
 			<< "\n1. Open Account"
@@ -27,8 +42,8 @@ int main()
 			<< "\n6. Quit"
 			<< std::endl;
 
+		// Input [option] with input checking for only numbers
 		std::cout << "> ";
-
 		while (!(std::cin >> option))
 		{
 			std::cin.clear();
@@ -37,9 +52,10 @@ int main()
 		}
 		std::cout << std::endl;
 
+		// Option handler (switch-cases)
 		switch (option)
 		{
-		case 1:
+		case 1: // Option 1 (Creating account)
 			a_bank = BankAccount::createAccountFromInput();
 
 			std::cout << "What account type would this be?"
@@ -106,7 +122,7 @@ int main()
 			}
 			std::cout << std::endl;
 			break;
-		case 2:
+		case 2: // Option 2 (See Account)
 			if (accountList.empty())
 			{
 				std::cout << "Sorry but there are no accounts registered." << std::endl;
@@ -141,7 +157,7 @@ int main()
 			}
 			std::cout << std::endl;
 			break;
-		case 3:
+		case 3: // Option 3 (Deposit)
 
 			if (accountList.empty())
 			{
@@ -186,8 +202,7 @@ int main()
 			}
 			std::cout << std::endl;
 			break;
-		case 4:
-
+		case 4: // Option 4 (Withdraw)
 			if (accountList.empty())
 			{
 				std::cout << "Sorry but there are no accounts registered." << std::endl;
@@ -229,7 +244,7 @@ int main()
 			}
 			std::cout << std::endl;
 			break;
-		case 5:
+		case 5: // Option 5 (Apply Interest)
 			if (accountList.empty())
 			{
 				std::cout << "Sorry but there are no accounts registered." << std::endl;
@@ -271,10 +286,10 @@ int main()
 			std::cout << std::endl;
 			break;
 		default:
-			continue;
+			continue; // Return back to menu screen if option number isn't defined in the switch-cases
 		}
 
-	} while (option != 6);
+	} while (option != 6); // End loop and end program once option is equal to 6
 
 	return 0;
 }
