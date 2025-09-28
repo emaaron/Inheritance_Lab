@@ -16,7 +16,9 @@ void SavingsAccount::calculateInterest()
 {
 	double interest = balance * interestRate;
 	balance += interest;
-	std::cout << "Interest added: $" << interest << ". Balance: $" << balance << std::endl;
+	std::cout << "Interest added: $" << interest
+		<< "\nBalance: $" << balance
+		<< std::endl;
 }
 /*--------------------*/
 

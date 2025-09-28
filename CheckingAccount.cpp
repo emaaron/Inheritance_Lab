@@ -24,11 +24,13 @@ void CheckingAccount::Withdraw(double amount)
 	else
 	{
 		balance -= total;
-		std::cout << "Withdrew: $" << amount << " + fee: $" << transactionFee << "\nCurrent Balance $" << balance << std::endl;
+		std::cout << "Withdrew: $" << amount
+			<< "\nFee: $" << transactionFee
+			<< "\nCurrent Balance: $" << balance
+			<< std::endl;
 	}
 	return;
 }
-
 
 /*--------------------*/
 

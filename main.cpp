@@ -7,7 +7,6 @@
 #include <limits>
 #include <memory>
 
-
 int main()
 {
 	BankAccount a_bank;
@@ -73,7 +72,7 @@ int main()
 			{
 				if (accountOption == 1)
 				{
-					std::cout << "Enter transaction fee" << std::endl;
+					std::cout << "Enter a transaction fee for the account." << std::endl;
 					std::cout << "$ ";
 
 					while (!(std::cin >> fee))
@@ -86,7 +85,7 @@ int main()
 				}
 				else if (accountOption == 2)
 				{
-					std::cout << "Enter interest rate" << std::endl;
+					std::cout << "Enter a interest rate for the account." << std::endl;
 					std::cout << "$ ";
 
 					while (!(std::cin >> rate))
@@ -254,7 +253,14 @@ int main()
 					{
 						found = true;
 						SavingsAccount* SavingsInterestAccount = dynamic_cast<SavingsAccount*>(accountList.at(i).get());
-						if (SavingsInterestAccount) { SavingsInterestAccount->calculateInterest(); }
+						if (SavingsInterestAccount)
+						{
+							SavingsInterestAccount->calculateInterest();
+						}
+						else
+						{
+							std::cout << "Account is not a savings account." << std::endl;
+						}
 					}
 				}
 				if (found == false)
